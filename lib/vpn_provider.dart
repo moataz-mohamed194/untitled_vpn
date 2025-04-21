@@ -25,10 +25,10 @@ class VpnProvider extends ChangeNotifier {
 
   ///Check if VPN is connected
   bool get isConnected => vpnStage == VPNStage.connected;
-  String groupIdentifier = "com.example.untitledVpn";
+  String groupIdentifier = "com.example.untitledVpn0";
   String localizationDescription = "OneConnect VPN";
 
-  String providerBundleIdentifier = "com.example.untitledVpn.VPNExtension";
+  String providerBundleIdentifier = "com.example.untitledVpn0.VPNExtension";
 
   ///Initialize VPN engine and load last server
   void initialize(BuildContext context) {
@@ -73,6 +73,7 @@ class VpnProvider extends ChangeNotifier {
   void connect() async {
     log("username: ${vpnConfig?.vpnUserName}");
     log("password: ${vpnConfig?.vpnPassword}");
+    log("serverName: ${vpnConfig?.serverName}");
 
     print("LOGCRED: ${vpnConfig?.vpnUserName}");
     print("LOGCRED: ${vpnConfig?.vpnPassword}");
@@ -84,6 +85,8 @@ class VpnProvider extends ChangeNotifier {
     } catch (e) {
       config = vpnConfig?.ovpnConfiguration;
     }
+    print("(config == null): ${(config == null)}");
+
     if (config == null) return;
     log(config);
     engine.connect(

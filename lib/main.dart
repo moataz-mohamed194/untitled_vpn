@@ -75,8 +75,21 @@ class _MyHomePageState extends State<MyHomePage> {
                         vpnProvider.vpnConfig0(vpnServerList[index]);
                         vpnProvider.connect();
                       },
-                      child: Text(
-                        '${vpnServerList[index].isFree}- ${vpnServerList[index].serverName} - ${vpnServerList[index].vpnUserName} - ${vpnServerList[index].vpnPassword}',
+                      child: Column(
+                        children: [
+                          Text(
+                            vpnServerList[index].isFree,
+                          ),
+                          Text(
+                            vpnServerList[index].serverName,
+                          ),
+                          Text(
+                            vpnServerList[index].vpnUserName,
+                          ),
+                          Text(
+                            vpnServerList[index].vpnPassword,
+                          ),
+                        ],
                       ),
                     ))),
       ),
