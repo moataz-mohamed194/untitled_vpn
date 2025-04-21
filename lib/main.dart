@@ -1,103 +1,40 @@
+// import 'package:country_codes/country_codes.dart';
 import 'package:flutter/material.dart';
-import 'package:oneconnect_flutter/openvpn_flutter.dart';
+// import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
-import 'package:untitled_vpn/vpn_provider.dart';
+import 'core/providers/globals/vpn_provider.dart';
+import 'core/resources/environment.dart';
+import 'core/utils/preferences.dart';
+import 'ui/screens/main_screen.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Preferences.init();
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  // await Firebase.initializeApp();
+  // await Future.wait([
+  //   // CountryCodes.init(),
+  //   // MobileAds.instance.initialize(),
+  //   // MobileAds.instance.updateRequestConfiguration(
+  //   //   RequestConfiguration(
+  //   //     testDeviceIds: [
+  //   //       'B3EEABB8EE11C2BE770B684D95219ECB',
+  //   //     ],
+  //   //   ),
+  //   // ),
+  // ].map((e) => Future.microtask(() => e)));
 
-  @override
-  Widget build(BuildContext context) {
-    return MultiProvider(
-        providers: [
-          ChangeNotifierProvider(
-              create: (context) => VpnProvider()..initialize(context)),
-        ],
-        builder: (context, child) => MaterialApp(
-              title: 'Flutter Demo',
-              theme: ThemeData(
-                colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-                useMaterial3: true,
-              ),
-              home: const MyHomePage(title: 'Flutter Demo Home Page'),
-            ));
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  static OpenVPN openVPN = OpenVPN();
-  var key = "SQbFynwQ.o854l5m5Mj.S3LdyXuLTXp53ezrCPh60MW9jgsMu9";
-  List<VpnServer> vpnServerList = [];
-
-  Future<void> _incrementCounter() async {
-    openVPN.initializeOneConnect(context, key);
-    List<VpnServer> x = await openVPN.fetchOneConnect(OneConnect.pro);
-    List<VpnServer> x2 = await openVPN.fetchOneConnect(OneConnect.free);
-    print('vpnServerList:${x.length}');
-    print('vpnServerList:${x2.length}');
-
-    setState(() {
-      vpnServerList.addAll(x);
-      vpnServerList.addAll(x2);
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+  return runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+            create: (context) => VpnProvider()..initialize(context)),
+      ],
+      builder: (context, child) => MaterialApp(
+        debugShowCheckedModeBanner: false,
+        // title: appName,
+        home: const MainScreen(),
       ),
-      body: Center(
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(
-                vpnServerList.length,
-                (index) => GestureDetector(
-                      onTap: () {
-                        var vpnProvider = VpnProvider.read(context);
-
-                        vpnProvider.vpnConfig0(vpnServerList[index]);
-                        vpnProvider.connect();
-                      },
-                      child: Column(
-                        children: [
-                          Text(
-                            vpnServerList[index].isFree,
-                          ),
-                          Text(
-                            vpnServerList[index].serverName,
-                          ),
-                          Text(
-                            vpnServerList[index].vpnUserName,
-                          ),
-                          Text(
-                            vpnServerList[index].vpnPassword,
-                          ),
-                        ],
-                      ),
-                    ))),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
-    );
-  }
+    ),
+  );
 }

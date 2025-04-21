@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:oneconnect_flutter/openvpn_flutter.dart';
 import 'package:provider/provider.dart';
 
-import 'preferences.dart';
+import '../../resources/environment.dart';
+import '../../utils/preferences.dart';
 
 class VpnProvider extends ChangeNotifier {
   VPNStage? vpnStage;
@@ -12,7 +13,7 @@ class VpnProvider extends ChangeNotifier {
   VpnServer? _vpnConfig;
 
   VpnServer? get vpnConfig => _vpnConfig;
-  vpnConfig0(VpnServer? value) {
+  set vpnConfig(VpnServer? value) {
     _vpnConfig = value;
     Preferences.instance().then((prefs) {
       prefs.setTrueServer(value);
@@ -25,10 +26,6 @@ class VpnProvider extends ChangeNotifier {
 
   ///Check if VPN is connected
   bool get isConnected => vpnStage == VPNStage.connected;
-  String groupIdentifier = "com.example.untitledVpn0";
-  String localizationDescription = "OneConnect VPN";
-
-  String providerBundleIdentifier = "com.example.untitledVpn0.VPNExtension";
 
   ///Initialize VPN engine and load last server
   void initialize(BuildContext context) {
@@ -43,11 +40,11 @@ class VpnProvider extends ChangeNotifier {
         providerBundleIdentifier: providerBundleIdentifier,
       );
 
-    // Preferences.instance().then((value) async {
-    //   vpnConfig =
-    //       value.getTrueServer(); //?? await ServersHttp(context).random();
-    //   notifyListeners();
-    // });
+    Preferences.instance().then((value) async {
+      vpnConfig =
+          value.getTrueServer(); //?? await ServersHttp(context).random();
+      notifyListeners();
+    });
   }
 
   ///VPN status changed
@@ -67,13 +64,10 @@ class VpnProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool certificateVerify = true;
-
   ///Connect to VPN server
   void connect() async {
     log("username: ${vpnConfig?.vpnUserName}");
     log("password: ${vpnConfig?.vpnPassword}");
-    log("serverName: ${vpnConfig?.serverName}");
 
     print("LOGCRED: ${vpnConfig?.vpnUserName}");
     print("LOGCRED: ${vpnConfig?.vpnPassword}");
@@ -85,8 +79,6 @@ class VpnProvider extends ChangeNotifier {
     } catch (e) {
       config = vpnConfig?.ovpnConfiguration;
     }
-    print("(config == null): ${(config == null)}");
-
     if (config == null) return;
     log(config);
     engine.connect(
@@ -99,12 +91,12 @@ class VpnProvider extends ChangeNotifier {
   }
 
   ///Select server from list
-  // Future<VpnServer?> selectServer(
-  //     BuildContext context, VpnServer config) async {
-  //   vpnConfig = config;
-  //   notifyListeners();
-  //   return vpnConfig;
-  // }
+  Future<VpnServer?> selectServer(
+      BuildContext context, VpnServer config) async {
+    vpnConfig = config;
+    notifyListeners();
+    return vpnConfig;
+  }
 
   ///Disconnect from VPN server if connected
   void disconnect() {

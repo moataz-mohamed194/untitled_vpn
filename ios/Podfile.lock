@@ -1,9 +1,15 @@
 PODS:
+  - connectivity_plus (0.0.1):
+    - Flutter
+    - ReachabilitySwift
+  - device_info_plus (0.0.1):
+    - Flutter
   - Flutter (1.0.0)
   - oneconnect_flutter (0.0.2):
     - Flutter
   - package_info_plus (0.4.5):
     - Flutter
+  - ReachabilitySwift (5.2.4)
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -11,13 +17,23 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
+  - connectivity_plus (from `.symlinks/plugins/connectivity_plus/ios`)
+  - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
   - Flutter (from `Flutter`)
   - oneconnect_flutter (from `.symlinks/plugins/oneconnect_flutter/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
 
+SPEC REPOS:
+  trunk:
+    - ReachabilitySwift
+
 EXTERNAL SOURCES:
+  connectivity_plus:
+    :path: ".symlinks/plugins/connectivity_plus/ios"
+  device_info_plus:
+    :path: ".symlinks/plugins/device_info_plus/ios"
   Flutter:
     :path: Flutter
   oneconnect_flutter:
@@ -30,9 +46,12 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
 
 SPEC CHECKSUMS:
+  connectivity_plus: 4d5101c5877bedcda6cd1ccb825307911667d6b0
+  device_info_plus: 21fcca2080fbcd348be798aa36c3e5ed849eefbe
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   oneconnect_flutter: 0d25827a1e3077b170d1e06e7a0a455649ab49a3
   package_info_plus: 566e1b7a2f3900e4b0020914ad3fc051dcc95596
+  ReachabilitySwift: 32793e867593cfc1177f5d16491e3a197d2fccda
   shared_preferences_foundation: 9e1978ff2562383bd5676f64ec4e9aa8fa06a6f7
   url_launcher_ios: 694010445543906933d732453a59da0a173ae33d
 

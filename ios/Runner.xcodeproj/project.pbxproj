@@ -81,7 +81,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		0000550A2DB6F28600C78CFE /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+		0000550A2DB6F28600C78CFE /* Exceptions for "VPNExtension" folder in "VPNExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -91,7 +91,18 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		000054FE2DB6F28600C78CFE /* VPNExtension */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (0000550A2DB6F28600C78CFE /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = VPNExtension; sourceTree = "<group>"; };
+		000054FE2DB6F28600C78CFE /* VPNExtension */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				0000550A2DB6F28600C78CFE /* Exceptions for "VPNExtension" folder in "VPNExtension" target */,
+			);
+			explicitFileTypes = {
+			};
+			explicitFolders = (
+			);
+			path = VPNExtension;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,8 +234,6 @@
 				000054FE2DB6F28600C78CFE /* VPNExtension */,
 			);
 			name = VPNExtension;
-			packageProductDependencies = (
-			);
 			productName = VPNExtension;
 			productReference = 000054FB2DB6F28600C78CFE /* VPNExtension.appex */;
 			productType = "com.apple.product-type.app-extension";

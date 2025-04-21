@@ -1,7 +1,8 @@
 import 'dart:convert';
 import 'package:oneconnect_flutter/openvpn_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:untitled_vpn/vpn_config.dart';
+
+import '../models/vpn_config.dart';
 
 class Preferences {
   final SharedPreferences shared;

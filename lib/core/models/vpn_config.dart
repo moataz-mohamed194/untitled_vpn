@@ -1,4 +1,3 @@
-
 import 'model.dart';
 
 class VpnConfig extends Model {
