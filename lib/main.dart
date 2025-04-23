@@ -38,7 +38,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
   static OpenVPN openVPN = OpenVPN();
   var key = "SQbFynwQ.o854l5m5Mj.S3LdyXuLTXp53ezrCPh60MW9jgsMu9";
   List<VpnServer> vpnServerList = [];
@@ -54,6 +53,12 @@ class _MyHomePageState extends State<MyHomePage> {
       vpnServerList.addAll(x);
       vpnServerList.addAll(x2);
     });
+  }
+
+  @override
+  void initState() {
+    _incrementCounter();
+    super.initState();
   }
 
   @override
